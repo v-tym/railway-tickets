@@ -1,0 +1,118 @@
+﻿@model Test.Models.Flight
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Change</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <input type="hidden" value="@ViewBag.flightId" name="flightId" />
+        <input type="hidden" value="@ViewBag.ComeId" name="ComeId" />
+        <input type="hidden" value="@ViewBag.OutId" name="OutId" />
+        <table class="table">           
+            <tr>
+                <td><p>FreeSeats </p></td>
+                <td><input type="number" name="FreeSeats" value="@ViewBag.FreeSeats" /> </td>
+
+            </tr>
+            <tr>
+               
+                <td><p>Станция прибытия </p></td>
+                <td>
+                    <select name="ComeStation">
+                        @foreach (var i in ViewBag.Station)
+                        {
+                            if (i.Id == ViewBag.SelectedCome)
+                            {
+                                <option selected value="@i.Id">@i.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@i.Id">@i.Name</option>
+                            }
+                        }
+
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><p>Дата прибытия</p></td>
+                <td><input type="datetime-local" name="dateCome" value="@ViewBag.DateCome" /> </td>
+            </tr>
+            
+            <tr>
+                <td><p>Станция отправления </p></td>
+                <td>
+                    <select name="OutStation">
+                        @foreach (var i in ViewBag.Station)
+                        {
+                            if (i.Id == ViewBag.SelectedOut)
+                            {
+                                <option selected value="@i.Id">@i.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@i.Id">@i.Name</option>
+                            }
+                        }
+
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><p>Дата отправления</p></td>
+                <td><input type="datetime-local" name="dateOut" value="@ViewBag.DateOut" /> </td>
+            </tr>
+
+            <tr>
+                <td><p>Поезда</p></td>
+                <td>
+                    <select name="selectedTrains" multiple>
+                        @foreach (var i in ViewBag.Trains)
+                        {
+                            bool x = false;
+                            foreach (var st in ViewBag.SelectedTrains)
+                            {
+                                if (i == st)
+                                {
+                                    x = true;
+                                    break;
+                                }
+
+                            }
+                            if (x == true)
+                            {
+                                <option selected value="@i.Id">@i.Number</option>
+                            }
+                            else
+                            {
+                                <option value="@i.Id">@i.Number</option>
+                            }
+                        }
+
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td><input type="submit" value="Отправить" /> </td>
+                <td></td>
+            </tr>
+        </table>
+
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index2")
+    </div>
+</body>
+</html>

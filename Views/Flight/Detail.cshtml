@@ -1,0 +1,58 @@
+﻿@model Test.Models.Flight
+@using Test.Models
+
+@{
+   Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Detail2</title>
+</head>
+<body>
+    <div>
+        <h4>Flight</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Come.Id)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Come.Id)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Out.Id)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Out.Id)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FreeSeats)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FreeSeats)
+            </dd>
+            <div class="display-label"><b>Train</b></div>
+            <dd>
+                @foreach (Train t in Model.Trains)
+                {
+                    <li>@t.Number</li>
+                }
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index2")
+    </p>
+</body>
+</html>

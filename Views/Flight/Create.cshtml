@@ -1,0 +1,79 @@
+﻿@model Test.Models.Flight
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+        <table class="table">
+            <tr>
+                <td><p>Свободно мест</p></td>
+                <td><input type="number" name="FreeSeats"/> </td>
+            </tr>
+            <tr>                
+                <td><p>Станция прибытия </p></td>
+                <td>
+                    <select name="ComeStation">
+                        @foreach (var i in ViewBag.Station)
+                        {
+                            <option value="@i.Id">@i.Name</option>
+                        }
+
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><p>Дата прибытия</p></td>
+                <td><input type="datetime-local" name="dateCome"/> </td>
+            </tr>
+            <tr>
+                <td><p>Станция отправления</p></td>
+                <td>
+                    <select name="OutStation">
+                        @foreach (var i in ViewBag.Station)
+                        {
+                            <option value="@i.Id">@i.Name</option>
+                        }
+
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><p>Дата отправления</p></td>
+                <td><input type="datetime-local" name="dateOut"/> </td>
+            </tr>
+
+            <tr>
+                <td><p>Поезда рейса</p></td>
+                <td>
+                    <select name="selectedTrains" multiple>
+                        @foreach (var i in ViewBag.Trains)
+                        {
+                            <option value="@i.Id">@i.Number</option>
+                        }
+
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td><input type="submit" value="Сохранить" /> </td>
+                <td></td>
+            </tr>
+        </table>
+    }
+    <div>
+        @Html.ActionLink("Back to List", "Index2")
+    </div>
+</body>
+</html>

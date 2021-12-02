@@ -1,0 +1,77 @@
+﻿@model Test.Models.FlightListViewModel
+@using Test.Models
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Filter flight";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index2</title>
+</head>
+<body>
+    <div>
+        <h2>Flights filter</h2>
+
+        <p>
+            @Html.ActionLink("Добавить новый рейс", "Create")
+        </p>
+
+        <form method="get">
+            <div class="form-inline">
+                <label class="control-label">Станция отправления: </label>
+                @Html.DropDownList("stationCome", Model.StationCome as SelectList,
+                            htmlAttributes: new { @class = "form-control" })
+
+                <label class="control-label">Дата отправления: </label>
+                <input type="date" name="dateOut" />
+
+                <input type="submit" value="Фильтр" class="btn btn-default" />
+            </div>
+        </form>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col"><p>Номер рейса</p></th>
+                    <th scope="col"><p>Кол-во свободных мест</p></th>
+                    <th scope="col"><p>Прибытие Город</p></th>
+                    <th scope="col"><p>Прибытие Дата</p></th>
+                    <th scope="col"><p>Отправление Город</p></th>
+                    <th scope="col"><p>Отправление Дата</p></th>
+                    <th scope="col"><p>Trains</p></th>
+                    <th scope="col">#</th>
+                    <th scope="col">#</th>
+                    @*<td scope="col">#</td>*@
+                </tr>
+            </thead>            
+            @foreach (var f in Model.Flights)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(molelItem => f.Id)</td>
+                    <td><p>@Html.DisplayFor(molelItem => f.FreeSeats)</p></td>
+                    <td><p>@Html.DisplayFor(molelItem => f.Come.Station.Name)</p></td>
+                    <td><p>@Html.DisplayFor(molelItem => f.Come.Date)</p></td>
+                    <td><p>@Html.DisplayFor(molelItem => f.Out.Station.Name)</p></td>
+                    <td><p>@Html.DisplayFor(molelItem => f.Out.Date)</p></td>
+                    <td>
+                        <ul>
+                            @foreach (Train t in f.Trains)
+                            {
+                                <li>@t.Number</li>
+                            }
+                        </ul>
+                    </td>
+                    <td><p><a href="/Flight/Delete/@f.Id">Delete</a></p></td>
+                    <td><p><a href="/Flight/Change/@f.Id">Change</a></p></td>
+                    @*<td><p><a href="/Flight/Detail/@f.Id">Detail</a></p></td>*@
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+﻿@using Test.Models
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Home Flight";
+}
+
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Рейсы</title>
+    </head>
+    <body>
+        <div>
+            <h3>Рейсы</h3>
+            <table>
+                <tr>
+                    <td><p>Номер рейса</p></td>
+                    <td><p>Кол-во свободных мест</p></td>
+                    <td><p>Прибытие Город</p></td>
+                    <td><p>Прибытие Дата</p></td>
+                    <td><p>Отправление Город</p></td>
+                    <td><p>Отправление Дата</p></td>
+                    <td><p>Trains</p></td>
+                    <td></td>
+                    <td></td>
+                   
+                </tr>
+                @foreach (var f in ViewBag.flights)
+                {
+            <tr>
+                <td><p>@f.Id</p></td>
+                <td><p>@f.FreeSeats</p></td>
+                <td><p>@f.Come.Station.Name</p></td>
+                <td><p>@f.Come.Date</p></td>
+                <td><p>@f.Out.Station.Name</p></td>
+                <td><p>@f.Out.Date</p></td>
+                <td>
+                    <ul>
+                        @foreach (Train t in f.Trains)
+                        {
+                            <li>@t.Number</li>
+                        }
+                    </ul>                   
+                </td>
+                <td><p><a href="/Flight/Delete/@f.Id">Delete</a></p></td>
+                <td><p><a href="/Flight/Change/@f.Id">Change</a></p></td>
+                @*<td><p><a href="/Flight/Detail/@f.Id">Detail</a></p></td>*@
+            </tr>
+                }
+            </table>
+            <p><a href="/Flight/Create">Создать</a></p>
+        </div>
+    </body>
+    </html>

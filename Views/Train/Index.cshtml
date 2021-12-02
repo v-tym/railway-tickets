@@ -1,0 +1,38 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <h3>Поезда</h3>
+        <p><a href="/Train/Create/">Создать поезд</a></p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td scope="col"><p>Номер поезда</p></td>
+                    <td scope="col"><p>Количество мест</p></td>
+                    <td scope="col">#</td>
+                    <td scope="col">#</td>
+                </tr>
+            </thead>
+            @foreach (var b in ViewBag.trains)
+            {
+                <tr>
+                    <td><p>@b.Number</p></td>
+                    <td><p>@b.QttSeats</p></td>
+                    <td><p><a href="/Train/Change/@b.Id">Изменить</a></p></td>
+                    <td><p><a href="/Train/Delete/@b.Id">Удалить</a></p></td>
+                </tr>
+            }
+        </table>
+    </div>    
+</body>
+</html>

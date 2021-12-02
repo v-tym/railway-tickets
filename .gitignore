@@ -1,0 +1,13 @@
+.DS_Store
+.idea
+.vscode
+.vs
+*.ai
+*.log
+*.pdf
+*.psd
+*.sublime*
+bin/
+obj/
+packages/
+Scripts/
